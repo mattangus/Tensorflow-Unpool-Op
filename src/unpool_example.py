@@ -18,21 +18,6 @@ def print_tensor(x, shape):
             print(p, q)
             print(x[p, :, :, q])
 
-
-@ops.RegisterGradient("MaxPoolWithArgmax")
-def _max_pool_grad_with_argmax(op, grad, unused_argmax_grad):
-    """
-    Register the gradient function for the argmax version
-    """
-    return gen_nn_ops._max_pool_grad_with_argmax(
-        op.inputs[0],
-        grad,
-        op.outputs[1],
-        op.get_attr("ksize"),
-        op.get_attr("strides"),
-        padding=op.get_attr("padding"))
-
-
 def main():
     # set up shape inputs
     k = 2
